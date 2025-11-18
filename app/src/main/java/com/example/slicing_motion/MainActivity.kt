@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.slicing_motion.ui.login.LoginScreen
 import com.example.slicing_motion.ui.theme.Slicing_motionTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Slicing_motionTheme {
-
+                LoginScreen()
             }
         }
     }
