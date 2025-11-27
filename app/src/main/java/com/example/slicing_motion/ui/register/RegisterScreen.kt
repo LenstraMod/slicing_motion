@@ -1,4 +1,4 @@
-package com.example.slicing_motion.ui.login
+package com.example.slicing_motion.ui.register
 
 import android.R
 import androidx.compose.foundation.background
@@ -42,10 +42,13 @@ import androidx.compose.runtime.*;
 
 @Composable
 @Preview
-fun LoginScreen(){
+fun RegisterScreen(){
 
+    var usernameValue by remember { mutableStateOf("") }
     var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
+    var passwordValueConfirmation by remember { mutableStateOf("") }
+
 
     Box(
         modifier = Modifier
@@ -61,11 +64,37 @@ fun LoginScreen(){
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Selamat Datang Kembali HydropoMate!\uD83C\uDF3F\uD83C\uDF43",
+                text = "Daftar Akun dan Mulai Bertani Hidroponik!\uD83C\uDF3F",
                 style = TextStyle(
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp
+                )
+            )
+
+            Spacer(modifier = Modifier.height(42.dp))
+
+            Text(
+                text = "Nama Lengkap",
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                modifier  = Modifier
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.Start)
+            )
+            OutlinedTextField(
+                value = usernameValue,
+                onValueChange = { usernameValue=it },
+                label = { Text("Masukkan Nama Lengkap")},
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth(),
+                colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+                    unfocusedContainerColor = Color(0xFFF7F8F9),
+                    unfocusedLabelColor = Color(0xFF8391A1),
+                    focusedBorderColor = Color(0xFF179778)
                 )
             )
 
@@ -98,7 +127,7 @@ fun LoginScreen(){
             Spacer(modifier = Modifier.height(42.dp))
 
             Text(
-                text = "Password",
+                text = "Buat Password",
                 style = TextStyle(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
@@ -110,6 +139,33 @@ fun LoginScreen(){
             OutlinedTextField(
                 value = passwordValue,
                 onValueChange = { passwordValue = it },
+                label = { Text("Masukkan Password")},
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth(),
+                colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+                    unfocusedContainerColor = Color(0xFFF7F8F9),
+                    unfocusedLabelColor = Color(0xFF8391A1),
+                    focusedBorderColor = Color(0xFF179778)
+
+                )
+            )
+
+            Spacer(modifier = Modifier.height(42.dp))
+
+            Text(
+                text = "Konfirmasi Password",
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                modifier  = Modifier
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.Start)
+            )
+            OutlinedTextField(
+                value = passwordValueConfirmation,
+                onValueChange = { passwordValueConfirmation = it },
                 label = { Text("Masukkan Password")},
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
