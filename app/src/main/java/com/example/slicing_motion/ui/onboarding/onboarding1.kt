@@ -1,4 +1,4 @@
-package com.example.slicing_motion.onboarding
+package com.example.slicing_motion.ui.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
