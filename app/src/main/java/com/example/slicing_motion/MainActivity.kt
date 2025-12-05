@@ -14,6 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.slicing_motion.ui.homepage.HomePageScreen
 import com.example.slicing_motion.ui.lamantanaman.LamanTamanScreen
 import com.example.slicing_motion.ui.login.LoginScreen
+import com.example.slicing_motion.ui.personalization.Personalization1
+import com.example.slicing_motion.ui.register.RegisterScreen
 import com.example.slicing_motion.ui.theme.Slicing_motionTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,8 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Slicing_motionTheme {
-                LamanTamanScreen()
+
             }
         }
     }
