@@ -44,8 +44,7 @@ import com.example.slicing_motion.common.model.Kit
 import com.example.slicing_motion.common.model.Plant
 
 @Composable
-@Preview(device = "spec:width=1080px,height=3090px,dpi=440")
-
+@Preview
 fun HomePageScreen() {
 
     val plants: List<Plant> = listOf(

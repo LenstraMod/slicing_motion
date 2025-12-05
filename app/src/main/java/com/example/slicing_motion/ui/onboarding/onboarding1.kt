@@ -18,7 +18,8 @@ import com.example.slicing_motion.R
 
 @Composable
 @Preview
-fun onboarding1(){
+fun onboarding1(
+){
     Box(
         modifier = Modifier
             .fillMaxSize()

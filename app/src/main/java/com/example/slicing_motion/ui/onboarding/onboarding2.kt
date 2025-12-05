@@ -39,7 +39,10 @@ import com.example.slicing_motion.R
 
 @Composable
 @Preview
-fun onboarding2(){
+fun onboarding2(
+    onNextClick : () -> Unit = {},
+    onSkipClick: () -> Unit = {}
+){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +62,7 @@ fun onboarding2(){
             )
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { onSkipClick() },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
@@ -143,7 +146,7 @@ fun onboarding2(){
                 }
 
                 IconButton(
-                    onClick = {},
+                    onClick = {onNextClick()},
                     modifier = Modifier
                         .size(56.dp)
                         .background(Color(0xFF35504B),RoundedCornerShape(16.dp))

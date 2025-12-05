@@ -42,7 +42,10 @@ import androidx.compose.runtime.*;
 
 @Composable
 @Preview
-fun LoginScreen(){
+fun LoginScreen(
+    onRegisterClick : () -> Unit = {},
+    onSubmitClick : () -> Unit = {}
+){
 
     var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
@@ -124,7 +127,7 @@ fun LoginScreen(){
             Spacer(modifier = Modifier.height(42.dp))
 
             Button(
-                onClick = {},
+                onClick = {onSubmitClick()},
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF179778)
@@ -146,7 +149,7 @@ fun LoginScreen(){
                         color = Color(0xFF179778)
                     ),
                     modifier = Modifier.clickable{
-
+                        onRegisterClick()
                     }
                 )
             }

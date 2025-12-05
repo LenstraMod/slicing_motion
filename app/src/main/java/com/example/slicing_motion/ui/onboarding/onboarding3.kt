@@ -40,7 +40,11 @@ import com.example.slicing_motion.R
 
 @Composable
 @Preview
-fun onboarding3(){
+fun onboarding3(
+    onFinishClick: () -> Unit = {},
+    onSkipClick: () -> Unit = {},
+    onBackClick: () -> Unit = {}
+){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -60,7 +64,7 @@ fun onboarding3(){
             )
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { onSkipClick() },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White),
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
@@ -117,7 +121,7 @@ fun onboarding3(){
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
-                    onClick = {},
+                    onClick = {onBackClick()},
                     modifier = Modifier
                         .size(56.dp)
                         .background(Color(0xFF35504B),RoundedCornerShape(16.dp))
@@ -136,6 +140,14 @@ fun onboarding3(){
                     Box(
                         modifier = Modifier
                             .size(12.dp)
+                            .background(Color(0xFF4A635F),CircleShape)
+                    )
+
+                    Spacer(Modifier.size(8.dp))
+
+                    Box(
+                        modifier = Modifier
+                            .size(12.dp)
                             .shadow(
                                 elevation = 10.dp,
                                 shape = CircleShape,
@@ -144,18 +156,10 @@ fun onboarding3(){
                             )
                             .background(Color(0xFF179778), CircleShape)
                     )
-
-                    Spacer(Modifier.size(8.dp))
-
-                    Box(
-                        modifier = Modifier
-                            .size(12.dp)
-                            .background(Color(0xFF4A635F),CircleShape)
-                    )
                 }
 
                 IconButton(
-                    onClick = {},
+                    onClick = {onFinishClick()},
                     modifier = Modifier
                         .size(56.dp)
                         .background(Color(0xFF35504B),RoundedCornerShape(16.dp))

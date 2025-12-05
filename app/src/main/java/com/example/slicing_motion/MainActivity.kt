@@ -11,9 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.slicing_motion.ui.homepage.HomePageScreen
-import com.example.slicing_motion.ui.lamantanaman.LamanTamanScreen
 import com.example.slicing_motion.ui.login.LoginScreen
+import com.example.slicing_motion.ui.navigation.AppNavigation
 import com.example.slicing_motion.ui.personalization.Personalization1
 import com.example.slicing_motion.ui.register.RegisterScreen
 import com.example.slicing_motion.ui.theme.Slicing_motionTheme
@@ -23,7 +22,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
+            Slicing_motionTheme {
+                AppNavigation()
             }
         }
     }

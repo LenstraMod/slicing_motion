@@ -33,19 +33,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.slicing_motion.R
 
 @Composable
 @Preview
-fun Personalization1(
+fun Personalization2(
     onBackClick: () -> Unit = {},
     onNextClick: () -> Unit = {},
     onSkipClick: () -> Unit = {}
@@ -82,12 +86,12 @@ fun Personalization1(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "1/3",
+                    text = "2/3",
                     style = TextStyle(color = Color.White, fontSize = 14.sp)
                 )
                 Spacer(Modifier.size(12.dp))
                 Button(
-                    onClick = { onSkipClick() },
+                    onClick = { onSkipClick },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF35504B)),
                     shape = RoundedCornerShape(12.dp),
                     contentPadding = PaddingValues(12.dp),
@@ -136,25 +140,37 @@ fun Personalization1(
                             .shadow(10.dp,RoundedCornerShape(24.dp))
                             .background(Color.White)
                             .padding(10.dp)
+
                     ) {
-                        QuestionHeader("Apakah kamu pernah mencoba menanam hidroponik sebelumnya?")
+                        QuestionHeader("Jenis tanaman apa saja yang ingin kamu tanam?")
 
                         Spacer(modifier = Modifier.height(16.dp))
+                        var selectedPlants by remember { mutableStateOf(setOf<String>()) }
 
-                        val q1Options = listOf(
-                            "Belum pernah",
-                            "Pernah tapi masih pemula",
-                            "Sudah cukup berpengalaman"
+                        val plantOptions = listOf(
+                            "Sayuran daun (misalnya selada, bayam)",
+                            "Buah (misalnya tomat, stroberi)",
+                            "Tanaman herbal",
+                            "Belum tahu / ingin rekomendasi"
                         )
 
-                        var selectedOption1 by remember { mutableStateOf("") }
 
-                        q1Options.forEach { option ->
-                            OptionItem(
-                                text = option,
-                                selected = selectedOption1 == option,
-                                onClick = { selectedOption1 = option }
-                            )
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            plantOptions.forEach { plant ->
+                                CheckItem(
+                                    text = plant,
+                                    // Check if this specific item is in our set
+                                    checked = selectedPlants.contains(plant),
+                                    onCheckedChange = {
+                                        // Logic: If selected, remove it. If not, add it.
+                                        selectedPlants = if (selectedPlants.contains(plant)) {
+                                            selectedPlants - plant
+                                        } else {
+                                            selectedPlants + plant
+                                        }
+                                    }
+                                )
+                            }
                         }
                     }
                 }
@@ -167,20 +183,43 @@ fun Personalization1(
                             .background(Color.White)
                             .padding(10.dp)
                     ) {
-                        QuestionHeader("Apa tujuan utama kamu menggunakan aplikasi HydropoMe?")
+                        QuestionHeader("Berapa  waktu yang bisa diluangkan per hari untuk merawat tanaman?")
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        val q1Options = listOf(
-                            "Belajar hidroponik dari awal",
-                            "Merawat tanaman hidroponik yang sudah ada",
-                            "Membeli peralatan dan perlengkapan hidroponik",
-                            "Menjual hasil panen"
+                        val q2Options = listOf(
+                            "< 10 menit",
+                            "10–30 menit",
+                            "> 30 menit",
                         )
 
                         var selectedOption2 by remember { mutableStateOf("") }
 
-                        q1Options.forEach { option ->
+                        q2Options.forEach { option ->
+                            OptionItem(
+                                text = option,
+                                selected = selectedOption2 == option,
+                                onClick = { selectedOption2 = option }
+                            )
+                        }
+                    }
+                }
+
+                item {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        QuestionHeader("Di mana kamu akan menanam tanaman hidroponik?")
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        val q2Options = listOf(
+                            "Dalam ruangan",
+                            "Luar Ruangan   ",
+                            "Balkon atau teras",
+                        )
+
+                        var selectedOption2 by remember { mutableStateOf("") }
+
+                        q2Options.forEach { option ->
                             OptionItem(
                                 text = option,
                                 selected = selectedOption2 == option,
@@ -193,7 +232,7 @@ fun Personalization1(
                 item {
                     Spacer(Modifier.height(24.dp))
                     Button(
-                        onClick = { onNextClick()},
+                        onClick = { onNextClick() },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(46.dp),

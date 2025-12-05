@@ -45,13 +45,11 @@ import com.example.slicing_motion.R
 
 @Composable
 @Preview
-fun Personalization1(
+fun Personalization3(
     onBackClick: () -> Unit = {},
     onNextClick: () -> Unit = {},
     onSkipClick: () -> Unit = {}
 ) {
-    var experience by remember {mutableStateOf("")}
-    var goals by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -82,7 +80,7 @@ fun Personalization1(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "1/3",
+                    text = "3/3",
                     style = TextStyle(color = Color.White, fontSize = 14.sp)
                 )
                 Spacer(Modifier.size(12.dp))
@@ -141,50 +139,19 @@ fun Personalization1(
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        val q1Options = listOf(
-                            "Belum pernah",
-                            "Pernah tapi masih pemula",
-                            "Sudah cukup berpengalaman"
+                        val imageOption = listOf(
+                            R.drawable.a1m,
+                            R.drawable.a2m,
+                            R.drawable.a3m
                         )
 
-                        var selectedOption1 by remember { mutableStateOf("") }
+                        var selectedImage by remember { mutableStateOf(0) }
 
-                        q1Options.forEach { option ->
-                            OptionItem(
-                                text = option,
-                                selected = selectedOption1 == option,
-                                onClick = { selectedOption1 = option }
-                            )
-                        }
-                    }
-                }
-
-                item {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .shadow(10.dp,RoundedCornerShape(24.dp))
-                            .background(Color.White)
-                            .padding(10.dp)
-                    ) {
-                        QuestionHeader("Apa tujuan utama kamu menggunakan aplikasi HydropoMe?")
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        val q1Options = listOf(
-                            "Belajar hidroponik dari awal",
-                            "Merawat tanaman hidroponik yang sudah ada",
-                            "Membeli peralatan dan perlengkapan hidroponik",
-                            "Menjual hasil panen"
-                        )
-
-                        var selectedOption2 by remember { mutableStateOf("") }
-
-                        q1Options.forEach { option ->
-                            OptionItem(
-                                text = option,
-                                selected = selectedOption2 == option,
-                                onClick = { selectedOption2 = option }
+                        imageOption.forEach { option ->
+                            OptionImage(
+                                imageRes = option,
+                                selected = (selectedImage == option),
+                                onClick = { selectedImage = option }
                             )
                         }
                     }
