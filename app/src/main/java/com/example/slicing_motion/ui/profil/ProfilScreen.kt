@@ -39,7 +39,10 @@ val BottomCurveShape = GenericShape { size, _ ->
 
 @Composable
 @Preview(showBackground = true)
-fun ProfilScreen() {
+fun ProfilScreen(
+    onEditClick : () -> Unit = {},
+    onCheckOrder: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -99,7 +102,7 @@ fun ProfilScreen() {
                 }
 
                 Button(
-                    onClick = {},
+                    onClick = onEditClick,
                     modifier = Modifier.height(38.dp),
                     shape = CircleShape,
                     colors = ButtonDefaults.buttonColors(
@@ -122,7 +125,7 @@ fun ProfilScreen() {
                 .padding(horizontal = 20.dp),
             verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            StatusPesananCard()
+            StatusPesananCard(onCheckOrder = onCheckOrder)
             PersonalisasiCard()
             LogoutCard()
         }
@@ -130,8 +133,11 @@ fun ProfilScreen() {
 }
 
 @Composable
-fun StatusPesananCard() {
+fun StatusPesananCard(
+    onCheckOrder: () -> Unit = {}
+) {
     Surface(
+        onClick = onCheckOrder,
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
         color = Color.White,

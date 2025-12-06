@@ -42,7 +42,10 @@ import androidx.compose.runtime.*;
 
 @Composable
 @Preview
-fun RegisterScreen(){
+fun RegisterScreen(
+    onBackClick: () -> Unit = {},
+    onLoginClick: () -> Unit = {}
+){
 
     var usernameValue by remember { mutableStateOf("") }
     var emailValue by remember { mutableStateOf("") }
@@ -194,15 +197,15 @@ fun RegisterScreen(){
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Belum memiliki akun? ")
+                Text("Sudah ada akun? ")
                 Text(
-                    text = "Daftar",
+                    text = "Masuk",
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF179778)
                     ),
                     modifier = Modifier.clickable{
-
+                        onLoginClick()
                     }
                 )
             }
@@ -211,7 +214,7 @@ fun RegisterScreen(){
 
         IconButton(
             onClick = {
-
+                onBackClick()
             },
             modifier = Modifier
                 .align(Alignment.TopStart)

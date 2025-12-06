@@ -48,7 +48,7 @@ import androidx.compose.ui.unit.sp
 import com.example.slicing_motion.R
 
 @Composable
-@Preview
+@Preview(device = "spec:width=1080px,height=4340px,dpi=440")
 fun Personalization2(
     onBackClick: () -> Unit = {},
     onNextClick: () -> Unit = {},
@@ -206,7 +206,11 @@ fun Personalization2(
                 }
 
                 item {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier
+                        .fillMaxWidth()
+                        .shadow(10.dp,RoundedCornerShape(24.dp))
+                        .background(Color.White)
+                        .padding(10.dp)) {
                         QuestionHeader("Di mana kamu akan menanam tanaman hidroponik?")
 
                         Spacer(modifier = Modifier.height(16.dp))

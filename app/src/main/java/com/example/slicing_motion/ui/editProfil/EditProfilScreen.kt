@@ -32,7 +32,10 @@ import com.example.slicing_motion.R
 
 @Composable
 @Preview(device = "spec:width=1080px,height=5000px,dpi=440")
-fun EditProfilScreen() {
+fun EditProfilScreen(
+    onBackClick: () -> Unit = {},
+    onCheckingOrder: () -> Unit
+) {
     var nama by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -56,6 +59,7 @@ fun EditProfilScreen() {
 
             // Back Button (posisi kiri)
             Surface(
+                onClick = onBackClick,
                 modifier = Modifier
                     .align(Alignment.CenterStart)
                     .size(45.dp),

@@ -5,7 +5,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.slicing_motion.ui.homepage.HomePageScreen
+import com.example.slicing_motion.ui.MainScreen
+import com.example.slicing_motion.ui.editProfil.EditProfilScreen
+import com.example.slicing_motion.ui.statuspesanan.StatusPesananScreen
+import com.example.slicing_motion.ui.lamantanaman.LamanTamanScreen
 import com.example.slicing_motion.ui.login.LoginScreen
 import com.example.slicing_motion.ui.onboarding.*
 import com.example.slicing_motion.ui.personalization.Personalization1
@@ -24,7 +27,12 @@ import kotlinx.serialization.Serializable
 @Serializable object RoutePersonalization1
 @Serializable object RoutePersonalization2
 @Serializable object RoutePersonalization3
-@Serializable object RouteHome
+@Serializable object RouteMainScreen
+@Serializable object RouteHomeScreen
+@Serializable object  RoutePlantDetailScreen
+
+@Serializable object RouteEditScreen
+@Serializable object RouteOrderTrackScreen
 
 
 @Composable
@@ -82,13 +90,16 @@ fun AppNavigation(){
         }
 
         composable<RouteRegister>{
-            RegisterScreen()
+            RegisterScreen(
+                onBackClick = {navController.popBackStack()},
+                onLoginClick = {navController.navigate(RouteLogin)}
+            )
         }
 
         composable<RoutePersonalization1> {
             Personalization1(
                 onNextClick = {navController.navigate(RoutePersonalization2)},
-                onSkipClick = {navController.navigate(RouteHome){
+                onSkipClick = {navController.navigate(RouteMainScreen){
                     popUpTo(RoutePersonalization1){inclusive=true}
                 } },
                 onBackClick = {navController.popBackStack()}
@@ -98,7 +109,7 @@ fun AppNavigation(){
         composable<RoutePersonalization2> {
             Personalization2(
                 onNextClick = {navController.navigate(RoutePersonalization3)},
-                onSkipClick = {navController.navigate(RouteHome){
+                onSkipClick = {navController.navigate(RouteMainScreen){
                     popUpTo(RoutePersonalization2){inclusive=true}
                 } },
                 onBackClick = {navController.popBackStack()}
@@ -107,18 +118,35 @@ fun AppNavigation(){
 
         composable<RoutePersonalization3> {
             Personalization3(
-                onNextClick = {navController.navigate(RouteHome){
+                onNextClick = {navController.navigate(RouteMainScreen){
                     popUpTo(RoutePersonalization3){inclusive=true}
                 }},
-                onSkipClick = {navController.navigate(RouteHome){
+                onSkipClick = {navController.navigate(RouteMainScreen){
                     popUpTo(RoutePersonalization3){inclusive=true}
                 }},
                 onBackClick = {navController.popBackStack()}
             )
         }
 
-        composable<RouteHome> {
-            HomePageScreen()
+        composable<RouteMainScreen> {
+            MainScreen(
+                onNavigateToDetail = {navController.navigate(RoutePlantDetailScreen)},
+                onEditingPage = {navController.navigate(RouteEditScreen)}
+            )
         }
+
+        composable<RoutePlantDetailScreen>{
+            LamanTamanScreen(
+                onBackClick = {navController.popBackStack()}
+            )
+        }
+
+        composable<RouteEditScreen> { EditProfilScreen(
+            onBackClick = {navController.popBackStack()},
+            onCheckingOrder = {navController.navigate(RouteOrderTrackScreen)}
+
+        ) }
+
+        composable<RouteOrderTrackScreen> { StatusPesananScreen() }
     }
 }
